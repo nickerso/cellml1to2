@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<model xmlns="http://www.cellml.org/cellml/1.0#" xmlns:cellml="http://www.cellml.org/cellml/1.1#" xmlns:cmeta="http://www.cellml.org/metadata/1.0#" cmeta:id="sin_approximations_import" name="sin_approximations_import">
+  <component cmeta:id="main" name="main">
+    <variable cmeta:id="x" initial_value="0" name="x" private_interface="out" public_interface="out" units="dimensionless"/>
+    <variable cmeta:id="sin" name="sin1" private_interface="in" public_interface="out" units="dimensionless"/>
+    <variable cmeta:id="deriv_approx" name="sin2" private_interface="in" public_interface="out" units="dimensionless"/>
+    <variable cmeta:id="deriv_approx_initial_value" initial_value="0" name="deriv_approx_initial_value" private_interface="out" public_interface="out" units="dimensionless"/>
+    <variable cmeta:id="parabolic_approx" name="sin3" private_interface="in" public_interface="out" units="dimensionless"/>
+  </component>
+  <component cmeta:id="sin" name="actual_sin">
+    <variable name="x" private_interface="out" public_interface="in" units="dimensionless"/>
+    <variable cmeta:id="sin" name="sin" private_interface="out" public_interface="out" units="dimensionless"/>
+    <math xmlns="http://www.w3.org/1998/Math/MathML">
+      <apply id="actual_sin">
+        <eq/>
+        <ci>sin</ci>
+        <apply>
+          <sin/>
+          <apply><plus/>
+          	<ci>x</ci>
+          	<cn cellml:units="dimensionless">1.0</cn>
+         </apply>
+        </apply>
+      </apply>
+    </math>
+  </component>
+  <component cmeta:id="component_1" name="test_component">
+  	<variable name="test_no_interface" units="dimensionless"/>
+    <variable name="test_public_interface_in" units="dimensionless" public_interface="in"/>
+    <variable name="test_private_interface_in" units="dimensionless" private_interface="in"/>
+    <variable name="test_public_interface_out" units="dimensionless" public_interface="out"/>
+    <variable name="test_private_interface_out" units="dimensionless" private_interface="out"/>
+    <variable name="test_public_interface_none" units="dimensionless" public_interface="none"/>
+    <variable name="test_private_interface_none" units="dimensionless" private_interface="none"/>
+    <variable name="test_private_public_interface_none" units="dimensionless" private_interface="none" public_interface="none"/>
+    <variable name="test_private_none_public_in" units="dimensionless" private_interface="none" public_interface="in"/>
+    <variable name="test_private_out_public_none" units="dimensionless" private_interface="out" public_interface="none"/>
+  </component>
+  <group cmeta:id="groupId">
+  	<relationship_ref relationship="encapsulation"/>
+  	<component_ref component="encaps_parent">
+  		<component_ref component="child_with_id" cmeta:id="child1">
+  			<component_ref component="grandchild1"/>
+  			<component_ref component="grandchild2"/>
+  		</component_ref>
+  	</component_ref>
+  </group>
+</model>
