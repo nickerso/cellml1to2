@@ -1,6 +1,14 @@
 <?xml version="1.0"?>
 <?xml-stylesheet type="text/xsl" href="../cellml1to2.xsl"?>
 <model xmlns="http://www.cellml.org/cellml/1.0#" xmlns:cellml="http://www.cellml.org/cellml/1.1#" xmlns:cmeta="http://www.cellml.org/metadata/1.0#" cmeta:id="sin_approximations_import" name="sin_approximations_import">
+  <units name="mV_per_ms">
+    <unit units="volt" prefix="milli"/>
+    <unit units="second" prefix="milli" exponent="-1"/>
+  </units>
+  <units name="pH" base_units="yes"/>
+  <units name="fahrenheit">
+    <unit multiplier="1.8" units="celsius" offset="32.0"/>
+  </units>
   <component cmeta:id="main" name="main">
     <variable cmeta:id="x" initial_value="0" name="x" private_interface="out" public_interface="out" units="dimensionless"/>
     <variable cmeta:id="sin" name="sin1" private_interface="in" public_interface="out" units="dimensionless"/>
