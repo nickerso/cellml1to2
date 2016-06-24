@@ -54,4 +54,9 @@
   		</component_ref>
   	</component_ref>
   </group>
+  <connection>
+    <map_components component_1="main" component_2="actual_sin"/>
+    <map_variables variable_1="sin" variable_2="sin"/>
+    <map_variables variable_1="x" variable_2="x"/>
+  </connection>
 </model>
