@@ -87,6 +87,10 @@
 		</xsl:if>
 	</xsl:template>
 
+	<!-- The reaction element has been removed -->
+	<xsl:template match="cellml10:reaction | cellml11:reaction">
+	</xsl:template>
+
 	<!-- The cmeta:id attribute becomes an unprefixed attribute on CellML elements -->
 	<xsl:template match="cellml10:*/@cmeta:id | cellml11:*/@cmeta:id">
 		<xsl:attribute name="id">
@@ -97,6 +101,11 @@
 	<!-- The xlink:href attribute gets copied -->
 	<xsl:template match="@xlink:href">
 		<xsl:copy-of select="."/>
+	</xsl:template>
+
+	<!-- Comments & text should be copied -->
+	<xsl:template match="comment() | text()">
+		<xsl:copy/>
 	</xsl:template>
 
 </xsl:stylesheet>

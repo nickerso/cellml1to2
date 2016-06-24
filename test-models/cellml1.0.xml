@@ -44,6 +44,25 @@
     <variable name="test_private_public_interface_none" units="dimensionless" private_interface="none" public_interface="none"/>
     <variable name="test_private_none_public_in" units="dimensionless" private_interface="none" public_interface="in"/>
     <variable name="test_private_out_public_none" units="dimensionless" private_interface="out" public_interface="none"/>
+    <!-- Note that this comment SHOULD be copied, but the reaction SHOULD NOT -->
+    <reaction reversible="yes">
+      <variable_ref variable="test_no_interface">
+        <role role="reactant" direction="forward" delta_variable="test_public_interface_in" stoichiometry="1"/>
+      </variable_ref>
+      <variable_ref variable="test_public_interface_out">
+        <role role="product" direction="forward" delta_variable="test_public_interface_out" stoichiometry="2"/>
+      </variable_ref>
+      <variable_ref variable="test_private_none_public_in">
+        <role role="rate">
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply id="reaction_rate"><eq/>
+              <ci>test_private_none_public_in</ci>
+              <ci>test_private_interface_none</ci>
+            </apply>
+          </math>
+        </role>
+      </variable_ref>
+    </reaction>
   </component>
   <group cmeta:id="groupId">
   	<relationship_ref relationship="encapsulation"/>
