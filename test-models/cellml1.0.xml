@@ -1,5 +1,14 @@
 <?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="../cellml1to2.xsl"?>
 <model xmlns="http://www.cellml.org/cellml/1.0#" xmlns:cellml="http://www.cellml.org/cellml/1.1#" xmlns:cmeta="http://www.cellml.org/metadata/1.0#" cmeta:id="sin_approximations_import" name="sin_approximations_import">
+  <units name="mV_per_ms">
+    <unit units="volt" prefix="milli"/>
+    <unit units="second" prefix="milli" exponent="-1"/>
+  </units>
+  <units name="pH" base_units="yes"/>
+  <units name="fahrenheit">
+    <unit multiplier="1.8" units="celsius" offset="32.0"/>
+  </units>
   <component cmeta:id="main" name="main">
     <variable cmeta:id="x" initial_value="0" name="x" private_interface="out" public_interface="out" units="dimensionless"/>
     <variable cmeta:id="sin" name="sin1" private_interface="in" public_interface="out" units="dimensionless"/>
@@ -35,6 +44,25 @@
     <variable name="test_private_public_interface_none" units="dimensionless" private_interface="none" public_interface="none"/>
     <variable name="test_private_none_public_in" units="dimensionless" private_interface="none" public_interface="in"/>
     <variable name="test_private_out_public_none" units="dimensionless" private_interface="out" public_interface="none"/>
+    <!-- Note that this comment SHOULD be copied, but the reaction SHOULD NOT -->
+    <reaction reversible="yes">
+      <variable_ref variable="test_no_interface">
+        <role role="reactant" direction="forward" delta_variable="test_public_interface_in" stoichiometry="1"/>
+      </variable_ref>
+      <variable_ref variable="test_public_interface_out">
+        <role role="product" direction="forward" delta_variable="test_public_interface_out" stoichiometry="2"/>
+      </variable_ref>
+      <variable_ref variable="test_private_none_public_in">
+        <role role="rate">
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply id="reaction_rate"><eq/>
+              <ci>test_private_none_public_in</ci>
+              <ci>test_private_interface_none</ci>
+            </apply>
+          </math>
+        </role>
+      </variable_ref>
+    </reaction>
   </component>
   <group cmeta:id="groupId">
   	<relationship_ref relationship="encapsulation"/>
@@ -45,4 +73,9 @@
   		</component_ref>
   	</component_ref>
   </group>
+  <connection>
+    <map_components component_1="main" component_2="actual_sin"/>
+    <map_variables variable_1="sin" variable_2="sin"/>
+    <map_variables variable_1="x" variable_2="x"/>
+  </connection>
 </model>
