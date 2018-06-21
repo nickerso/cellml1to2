@@ -60,7 +60,7 @@
 	<xsl:template match="cellml10:variable | cellml11:variable">
 		<xsl:element name="variable" namespace="http://www.cellml.org/cellml/2.0#">
 			<xsl:apply-templates select="@cmeta:id"/>
-			<xsl:copy-of select="@name | @initial_value"/>
+			<xsl:copy-of select="@name | @initial_value | @units"/>
 			<xsl:variable name="has_public_if" select="@public_interface and @public_interface != 'none'"/>
 			<xsl:variable name="has_private_if" select="@private_interface and @private_interface != 'none'"/>
 			<xsl:choose>
